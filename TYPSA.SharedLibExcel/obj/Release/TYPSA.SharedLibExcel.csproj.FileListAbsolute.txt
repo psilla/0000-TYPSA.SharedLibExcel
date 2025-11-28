@@ -51,3 +51,6 @@ C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\obj\Release\TYPSA.SharedLibExc
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\obj\Release\TYPSA.Sh.34696ADF.Up2Date
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\obj\Release\TYPSA.SharedLibExcel.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\obj\Release\TYPSA.SharedLibExcel.pdb
+C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.dll
+C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.pdb
+C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.dll.config

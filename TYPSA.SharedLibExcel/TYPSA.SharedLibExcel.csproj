@@ -126,9 +126,19 @@
   <ItemGroup>
     <Compile Include="00-ExcelData\cls_00_GetExcelSheetNames_OpenXml.cs" />
     <Compile Include="00-ExcelData\cls_00_GetExcelHead_OpenXml.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportToExcelAdjacency_OpenXml.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportToExcelObjectDict_OpenXml.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportLabelsToExcel_OpenXml.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportReportToExcel.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcel_OpenXml_BySheet.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcel_OpenXml_OneSheet.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportPathsToExcel.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_SelectExcelFile.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_SelectExcelDirectory.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_ReadCoordFromExcel.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_ReadAdjListFromExcel.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_ReadOrigAndDestFromExcel.cs" />
+    <Compile Include="00-ImportFromExcel\cls_00_ReadTrayDictFromExcel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,6 +146,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\0000-TYPSA.SharedLibForms\TYPSA.SharedLibForms\TYPSA.SharedLibForms.csproj">
+      <Project>{8f836313-b339-4db6-8a55-af61386871b4}</Project>
+      <Name>TYPSA.SharedLibForms</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
