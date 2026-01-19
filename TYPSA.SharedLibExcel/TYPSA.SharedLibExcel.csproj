@@ -126,6 +126,7 @@
   <ItemGroup>
     <Compile Include="00-ExcelData\cls_00_GetExcelSheetNames_OpenXml.cs" />
     <Compile Include="00-ExcelData\cls_00_GetExcelHead_OpenXml.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportToExcelObjectDictExi_OpenXml.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcelAdjacency_OpenXml.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcelObjectDict_OpenXml.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportLabelsToExcel_OpenXml.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcel_OpenXml_BySheet.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportToExcel_OpenXml_OneSheet.cs" />
     <Compile Include="00-ExportToExcel\cls_00_ExportPathsToExcel.cs" />
+    <Compile Include="00-ExportToExcel\cls_00_ExportStringCabSummary.cs" />
     <Compile Include="00-ImportFromExcel\cls_00_SelectExcelFile.cs" />
     <Compile Include="00-ImportFromExcel\cls_00_SelectExcelDirectory.cs" />
     <Compile Include="00-ImportFromExcel\cls_00_ReadCoordFromExcel.cs" />

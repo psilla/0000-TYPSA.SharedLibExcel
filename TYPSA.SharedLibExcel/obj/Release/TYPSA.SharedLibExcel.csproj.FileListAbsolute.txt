@@ -54,3 +54,5 @@ C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\obj\Release\TYPSA.SharedLibExc
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.pdb
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\TYPSA.SharedLibForms.dll.config
+C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\00-UserForms\SelectFilesDialog.resx
+C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Release\00-UserForms\SelectFilesDialog.cs
