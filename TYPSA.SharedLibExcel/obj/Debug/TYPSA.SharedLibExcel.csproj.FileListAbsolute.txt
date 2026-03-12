@@ -18,7 +18,6 @@ C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Buffers.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.ComponentModel.Annotations.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Memory.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Numerics.Vectors.dll
-C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Security.Cryptography.Pkcs.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Text.Encoding.CodePages.dll
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Text.Encodings.Web.dll
@@ -39,7 +38,6 @@ C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\Microsoft.IO.Recycla
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Buffers.xml
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Memory.xml
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Numerics.Vectors.xml
-C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Security.Cryptography.Pkcs.xml
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\0000-TYPSA.SharedLibExcel\TYPSA.SharedLibExcel\bin\Debug\System.Text.Encodings.Web.xml

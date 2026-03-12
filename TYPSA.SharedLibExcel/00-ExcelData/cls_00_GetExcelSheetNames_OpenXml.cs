@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using OfficeOpenXml;
+using System.Text;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace TYPSA.SharedLib.Excel
 {
@@ -11,50 +12,54 @@ namespace TYPSA.SharedLib.Excel
     {
         public static List<string> GetExcelSheetNames(string filePath)
         {
-            List<string> sheetNames = new List<string>();
+            // EPPlus setup
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+            // Verificar si el archivo existe
+            if (!File.Exists(filePath))
+            {
+                // Validamos
+                MessageBox.Show(
+                    "❌ ERROR: The file does not exist at the specified path.",
+                    "File Error"
+                );
+                // Finalizamos
+                return null;
+            }
             // try
             try
             {
-                // Verificar si el archivo existe
-                if (!File.Exists(filePath))
+                using (ExcelPackage package = new ExcelPackage(new FileInfo(filePath)))
                 {
-                    MessageBox.Show("❌ ERROR: The file does not exist at the specified path.", "File Error");
-                    return null;
-                }
-
-                FileInfo fileInfo = new FileInfo(filePath);
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-                using (ExcelPackage package = new ExcelPackage(fileInfo))
-                {
-                    // Verificar si hay hojas en el archivo
+                    // Validamos hojas
                     if (package.Workbook.Worksheets.Count == 0)
                     {
-                        MessageBox.Show("⚠️ The Excel file contains no sheets.", "Warning");
-                        return null;
+                        // Mensaje
+                        MessageBox.Show(
+                            "⚠️ The Excel file contains no sheets.",
+                            "Warning"
+                        );
+                        // Finalizamos
+                        return null; 
                     }
-
-                    // Agregar nombres de hojas a la lista
-                    foreach (var sheet in package.Workbook.Worksheets)
-                    {
-                        sheetNames.Add(sheet.Name);
-                    }
+                    // return
+                    return package.Workbook.Worksheets.Select(ws => ws.Name).ToList();
                 }
-
-                // Mostrar las hojas encontradas en un MessageBox
-                MessageBox.Show(
-                    $"✅ Sheets found:\n\n{string.Join("\n", sheetNames.OrderBy(h => h, StringComparer.OrdinalIgnoreCase).ToList())}", "Excel Sheets");
             }
+            // catch
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ ERROR while retrieving Excel sheets:\n{ex.Message}", "Error");
+                // Mensaje
+                MessageBox.Show(
+                    $"❌ ERROR while retrieving Excel sheets:\n{ex.Message}",
+                    "Error"
+                );
+                // Finalizamos
                 return null;
             }
-
-            // return
-            return sheetNames;
         }
+
 
 
     }

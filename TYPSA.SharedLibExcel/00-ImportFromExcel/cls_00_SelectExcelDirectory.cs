@@ -5,9 +5,9 @@ namespace TYPSA.SharedLib.Excel
 {
     public class cls_00_SelectExcelDirectory
     {
-        public static string SelectExcelDirectory()
+        public static string SelectExcelDirectory(string labelText = null)
         {
-            using (var form = new ExcelPathEntry())
+            using (var form = new ExcelPathEntry(labelText))
             {
                 // Validamos
                 if (form.ShowDialog() == DialogResult.OK)
@@ -28,6 +28,9 @@ namespace TYPSA.SharedLib.Excel
                 }
             }
         }
+
+       
+
 
 
 

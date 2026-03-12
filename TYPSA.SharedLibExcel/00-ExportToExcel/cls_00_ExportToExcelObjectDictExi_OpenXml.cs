@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -22,9 +23,7 @@ namespace TYPSA.SharedLib.Excel
             try
             {
                 // EPPlus setup
-                System.Text.Encoding.RegisterProvider(
-                    System.Text.CodePagesEncodingProvider.Instance
-                );
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 if (dict == null || dict.Count == 0)

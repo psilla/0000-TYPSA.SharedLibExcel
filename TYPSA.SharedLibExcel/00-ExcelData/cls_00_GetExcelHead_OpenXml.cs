@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using OfficeOpenXml;
+using System.Text;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace TYPSA.SharedLib.Excel
 {
@@ -21,6 +22,7 @@ namespace TYPSA.SharedLib.Excel
             try
             {
                 FileInfo fileInfo = new FileInfo(filePath);
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 using (ExcelPackage package = new ExcelPackage(fileInfo))
