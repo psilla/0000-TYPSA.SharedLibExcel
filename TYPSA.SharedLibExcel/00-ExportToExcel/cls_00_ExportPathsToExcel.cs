@@ -12,9 +12,9 @@ namespace TYPSA.SharedLib.Excel
             List<(string Terminal, List<string> Path, double Length, bool IsComplete)> results
         )
         {
-            // ======================================
+            // -----------------------------==========
             // 4. EXPORTAR EN LA MISMA HOJA DEL EXCEL
-            // ======================================
+            // -----------------------------==========
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (var package = new ExcelPackage(new FileInfo(excelPath)))

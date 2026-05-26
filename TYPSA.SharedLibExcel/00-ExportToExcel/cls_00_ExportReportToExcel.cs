@@ -399,6 +399,7 @@ namespace TYPSA.SharedLib.Excel
         public static void SaveExcelReportInFolder_BySheet_Report_Count(
             Dictionary<string, StringBuilder> regionReports,
             List<Dictionary<string, List<List<object>>>> exportDataList,
+            StringBuilder sbAmpacityReport,
             string projectCode,
             string reportName,
             string rootFolderName = "AztecHrAutomations",
@@ -416,6 +417,10 @@ namespace TYPSA.SharedLib.Excel
 
                 using (var package = new ExcelPackage())
                 {
+                    // -----------------------------=============================
+                    // Hoja 1: Report
+                    // -----------------------------=============================
+
                     var wsReport = package.Workbook.Worksheets.Add("Report");
 
                     int rowCursor = 1;
@@ -519,10 +524,43 @@ namespace TYPSA.SharedLib.Excel
 
                     wsReport.Cells.AutoFitColumns();
 
-                    foreach (var kvp in regionReports)
+                    // -----------------------------=============================
+                    // Hoja 2: Ampacity Report
+                    // -----------------------------=============================
+
+                    if (sbAmpacityReport != null && sbAmpacityReport.Length > 0)
                     {
-                        AddRegionReportWorksheet(package, kvp.Key, kvp.Value);
+                        var wsAmp = package.Workbook.Worksheets.Add("Ampacity Report");
+
+                        int row = 1;
+                        // Contenido
+                        string[] lines = sbAmpacityReport.ToString()
+                            .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+                        foreach (var line in lines)
+                        {
+                            wsAmp.Cells[row, 1].Value = line;
+                            row++;
+                        }
+
+                        wsAmp.Cells.AutoFitColumns();
                     }
+
+                    // -----------------------------=============================
+                    // Hojas 3+: Report by Skid
+                    // -----------------------------=============================
+
+                    if (regionReports != null)
+                    {
+                        foreach (var kvp in regionReports)
+                        {
+                            AddRegionReportWorksheet(package, kvp.Key, kvp.Value);
+                        }
+                    }
+
+                    // -----------------------------=============================
+                    // Guardar
+                    // -----------------------------=============================
 
                     File.WriteAllBytes(fullPath, package.GetAsByteArray());
                 }

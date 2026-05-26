@@ -20,9 +20,9 @@ namespace TYPSA.SharedLib.Excel
                 if (ws == null)
                     throw new Exception("No worksheets found.");
 
-                // ============================
+                // -----------------------------
                 // Buscar columnas por encabezado
-                // ============================
+                // -----------------------------
                 int headerRow = 1;
                 Dictionary<string, int> cols = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
@@ -42,9 +42,9 @@ namespace TYPSA.SharedLib.Excel
                         throw new Exception($"Header '{h}' not found in Excel.");
                 }
 
-                // ============================
+                // -----------------------------
                 // Leer filas
-                // ============================
+                // -----------------------------
                 for (int row = headerRow + 1; row <= ws.Dimension.End.Row; row++)
                 {
                     string handle = ws.Cells[row, cols["Handle"]].Text.Trim();
