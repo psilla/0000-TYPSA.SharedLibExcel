@@ -5,14 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|c:\\0000-typsa.sharedlibexcel\\typsa.sharedlibexcel\\00-exporttoexcel\\cls_00_exportlabelstoexcel_openxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|solutionrelative:00-exporttoexcel\\cls_00_exportlabelstoexcel_openxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-exporttoexcel\\cls_00_exportreporttoexcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|solutionrelative:00-exporttoexcel\\cls_00_exportreporttoexcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-exporttoexcel\\cls_00_exporttoexcel_openxml_bysheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FF31B661-8CE6-420F-8720-F077B273E9C6}|TYPSA.SharedLibExcel.csproj|solutionrelative:00-exporttoexcel\\cls_00_exporttoexcel_openxml_bysheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,18 +50,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "cls_00_ExportReportToExcel.cs",
-              "DocumentMoniker": "C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-ExportToExcel\\cls_00_ExportReportToExcel.cs",
-              "RelativeDocumentMoniker": "00-ExportToExcel\\cls_00_ExportReportToExcel.cs",
-              "ToolTip": "C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-ExportToExcel\\cls_00_ExportReportToExcel.cs",
-              "RelativeToolTip": "00-ExportToExcel\\cls_00_ExportReportToExcel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T06:07:22.083Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "cls_00_ExportLabelsToExcel_OpenXml.cs",
               "DocumentMoniker": "C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-ExportToExcel\\cls_00_ExportLabelsToExcel_OpenXml.cs",
@@ -80,18 +60,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-17T06:07:20.79Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "cls_00_ExportToExcel_OpenXml_BySheet.cs",
-              "DocumentMoniker": "C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-ExportToExcel\\cls_00_ExportToExcel_OpenXml_BySheet.cs",
-              "RelativeDocumentMoniker": "00-ExportToExcel\\cls_00_ExportToExcel_OpenXml_BySheet.cs",
-              "ToolTip": "C:\\0000-TYPSA.SharedLibExcel\\TYPSA.SharedLibExcel\\00-ExportToExcel\\cls_00_ExportToExcel_OpenXml_BySheet.cs",
-              "RelativeToolTip": "00-ExportToExcel\\cls_00_ExportToExcel_OpenXml_BySheet.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAADgvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T12:21:25.585Z"
             }
           ]
         },

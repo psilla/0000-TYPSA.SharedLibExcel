@@ -61,7 +61,7 @@ namespace TYPSA.SharedLib.Excel
         private static string GetExcelReportFullPath(
             string projectCode,
             string reportName,
-            string rootFolderName = "AztecHrAutomations",
+            string rootFolderName,
             bool exportToDesktop = true,
             string customBasePath = null
         )
@@ -209,7 +209,7 @@ namespace TYPSA.SharedLib.Excel
             Dictionary<string, StringBuilder> regionReports,
             string projectCode,
             string reportName,
-            string rootFolderName = "AztecHrAutomations",
+            string rootFolderName,
             bool exportToDesktop = true,
             string customBasePath = null
         )
@@ -256,7 +256,7 @@ namespace TYPSA.SharedLib.Excel
             List<Dictionary<string, List<List<object>>>> exportDataList,
             string projectCode,
             string reportName,
-            string rootFolderName = "AztecHrAutomations",
+            string rootFolderName,
             bool exportToDesktop = true,
             string customBasePath = null
         )
@@ -402,7 +402,7 @@ namespace TYPSA.SharedLib.Excel
             StringBuilder sbAmpacityReport,
             string projectCode,
             string reportName,
-            string rootFolderName = "AztecHrAutomations",
+            string rootFolderName,
             bool exportToDesktop = true,
             string customBasePath = null
         )
@@ -556,6 +556,69 @@ namespace TYPSA.SharedLib.Excel
                         {
                             AddRegionReportWorksheet(package, kvp.Key, kvp.Value);
                         }
+                    }
+
+                    // -----------------------------=============================
+                    // Guardar
+                    // -----------------------------=============================
+
+                    File.WriteAllBytes(fullPath, package.GetAsByteArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"❌ Failed to export Excel report:\n\n{ex.Message}",
+                    "Excel Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        public static void SaveExcelReportInFolder_ByRegionReportsOnly(
+            Dictionary<string, StringBuilder> regionReports,
+            string projectCode,
+            string reportName,
+            string rootFolderName,
+            bool exportToDesktop = true,
+            string customBasePath = null
+        )
+        {
+            try
+            {
+                string fullPath = GetExcelReportFullPath(
+                    projectCode, reportName, rootFolderName, exportToDesktop, customBasePath
+                );
+
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+                using (var package = new ExcelPackage())
+                {
+                    // -----------------------------=============================
+                    // Hojas: Report by Skid / Region
+                    // -----------------------------=============================
+
+                    if (regionReports != null)
+                    {
+                        foreach (var kvp in regionReports)
+                        {
+                            if (kvp.Value == null || kvp.Value.Length == 0)
+                                continue;
+
+                            AddRegionReportWorksheet(package, kvp.Key, kvp.Value);
+                        }
+                    }
+
+                    // -----------------------------=============================
+                    // Evitar Excel vacío
+                    // -----------------------------=============================
+
+                    if (package.Workbook.Worksheets.Count == 0)
+                    {
+                        var wsEmpty = package.Workbook.Worksheets.Add("Report");
+                        wsEmpty.Cells[1, 1].Value = "No report data available.";
+                        wsEmpty.Cells.AutoFitColumns();
                     }
 
                     // -----------------------------=============================
