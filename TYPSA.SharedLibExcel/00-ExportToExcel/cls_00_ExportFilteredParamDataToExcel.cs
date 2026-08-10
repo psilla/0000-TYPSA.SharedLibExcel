@@ -12,6 +12,7 @@ namespace TYPSA.SharedLib.Excel
     {
         public static void ExportParamDataToExcel(
             Dictionary<string, object> dictDataByFileToJson,
+            List<string> headers,
             string dataByFileNameKey,
             string fileNameKey,
             string civilParamDataKey,
@@ -38,105 +39,62 @@ namespace TYPSA.SharedLib.Excel
                 // Validar diccionario principal
                 // -----------------------------
 
-                if (
-                    dictDataByFileToJson == null ||
-                    dictDataByFileToJson.Count == 0 ||
-                    !dictDataByFileToJson.ContainsKey(dataByFileNameKey) ||
-                    dictDataByFileToJson[dataByFileNameKey] == null
-                )
-                {
-                    return;
-                }
+                if (dictDataByFileToJson == null || dictDataByFileToJson.Count == 0 ||
+                    !dictDataByFileToJson.ContainsKey(dataByFileNameKey) || dictDataByFileToJson[dataByFileNameKey] == null
+                ) return;
+                
 
                 // Obtenemos los datos por archivo
-                List<Dictionary<string, object>> dataByFileName =
-                    dictDataByFileToJson[dataByFileNameKey]
-                        as List<Dictionary<string, object>>;
-
+                List<Dictionary<string, object>> dataByFileName = 
+                    dictDataByFileToJson[dataByFileNameKey] as List<Dictionary<string, object>>;
                 // Validamos
-                if (dataByFileName == null || dataByFileName.Count == 0)
-                {
-                    return;
-                }
+                if (dataByFileName == null || dataByFileName.Count == 0) return;
+               
 
                 // -----------------------------
                 // Obtener todos los PropName
                 // -----------------------------
 
-                HashSet<string> propertyNamesSet =
-                    new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
+                HashSet<string> propertyNamesSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                // Iteramos
                 foreach (Dictionary<string, object> fileData in dataByFileName)
                 {
                     // Validamos
-                    if (
-                        !fileData.ContainsKey(civilParamDataKey) ||
-                        fileData[civilParamDataKey] == null
-                    )
-                    {
-                        continue;
-                    }
-
-                    List<Dictionary<string, object>> civilParamData =
-                        fileData[civilParamDataKey]
-                            as List<Dictionary<string, object>>;
-
+                    if (!fileData.ContainsKey(civilParamDataKey) || fileData[civilParamDataKey] == null) continue;
+                    
+                    List<Dictionary<string, object>> civilParamData = 
+                        fileData[civilParamDataKey] as List<Dictionary<string, object>>;
                     // Validamos
-                    if (civilParamData == null)
-                    {
-                        continue;
-                    }
-
+                    if (civilParamData == null) continue;
+                   
+                    // Iteramos
                     foreach (Dictionary<string, object> entityData in civilParamData)
                     {
                         // Validamos
-                        if (
-                            !entityData.ContainsKey(propertySetInfoKey) ||
-                            entityData[propertySetInfoKey] == null
-                        )
-                        {
-                            continue;
-                        }
-
-                        List<Dictionary<string, object>> propertySetInfo =
-                            entityData[propertySetInfoKey]
-                                as List<Dictionary<string, object>>;
-
+                        if (!entityData.ContainsKey(propertySetInfoKey) || entityData[propertySetInfoKey] == null) continue;
+                      
+                        List<Dictionary<string, object>> propertySetInfo = 
+                            entityData[propertySetInfoKey] as List<Dictionary<string, object>>;
                         // Validamos
-                        if (propertySetInfo == null)
-                        {
-                            continue;
-                        }
-
+                        if (propertySetInfo == null) continue;
+                        
+                        // Iteramos
                         foreach (Dictionary<string, object> psetData in propertySetInfo)
                         {
                             // Validamos
-                            if (
-                                !psetData.ContainsKey(parametersKey) ||
-                                psetData[parametersKey] == null
-                            )
-                            {
-                                continue;
-                            }
-
-                            List<Dictionary<string, object>> parameters =
-                                psetData[parametersKey]
-                                    as List<Dictionary<string, object>>;
-
+                            if (!psetData.ContainsKey(parametersKey) || psetData[parametersKey] == null) continue;
+                           
+                            List<Dictionary<string, object>> parameters = psetData[parametersKey] as List<Dictionary<string, object>>;
                             // Validamos
-                            if (parameters == null)
-                            {
-                                continue;
-                            }
-
+                            if (parameters == null) continue;
+                           
+                            // Iteramos
                             foreach (Dictionary<string, object> parameter in parameters)
                             {
-                                string propName =
-                                    parameter.ContainsKey(propNameKey) &&
-                                    parameter[propNameKey] != null
-                                        ? parameter[propNameKey].ToString()
-                                        : null;
-
+                                string propName = parameter.ContainsKey(propNameKey) && parameter[propNameKey] != null
+                                    ? parameter[propNameKey].ToString()
+                                    : null;
+                                // Validamos
                                 if (!string.IsNullOrWhiteSpace(propName))
                                 {
                                     propertyNamesSet.Add(propName);
@@ -146,23 +104,18 @@ namespace TYPSA.SharedLib.Excel
                     }
                 }
 
-                List<string> propertyNames = propertyNamesSet
-                    .OrderBy(x => x)
-                    .ToList();
+                // Ordenamos
+                List<string> propertyNames = propertyNamesSet.OrderBy(x => x).ToList();
 
                 // -----------------------------
-                // Preparar encabezados
+                // Preparar encabezados finales
                 // -----------------------------
 
-                List<string> headers = new List<string>
-        {
-            "FileName",
-            "Handle",
-            "Layer",
-            "ObjectType"
-        };
+                // Creamos una copia para no modificar la lista recibida
+                List<string> finalHeaders = new List<string>(headers.Take(4));
 
-                headers.AddRange(propertyNames);
+                // Añadimos los encabezados a las propiedades
+                finalHeaders.AddRange(propertyNames);
 
                 // -----------------------------
                 // Archivo temporal
@@ -183,16 +136,15 @@ namespace TYPSA.SharedLib.Excel
 
                 using (ExcelPackage package = new ExcelPackage(fileInfo))
                 {
-                    ExcelWorksheet ws =
-                        package.Workbook.Worksheets.Add("ParamData");
+                    ExcelWorksheet ws = package.Workbook.Worksheets.Add("ParamData");
 
                     // -----------------------------
                     // Headers
                     // -----------------------------
 
-                    for (int col = 0; col < headers.Count; col++)
+                    for (int col = 0; col < finalHeaders.Count; col++)
                     {
-                        ws.Cells[1, col + 1].Value = headers[col];
+                        ws.Cells[1, col + 1].Value = finalHeaders[col];
                     }
 
                     int row = 2;
@@ -203,113 +155,71 @@ namespace TYPSA.SharedLib.Excel
 
                     foreach (Dictionary<string, object> fileData in dataByFileName)
                     {
-                        string fileName =
-                            fileData.ContainsKey(fileNameKey) &&
-                            fileData[fileNameKey] != null
-                                ? fileData[fileNameKey].ToString()
-                                : "Unknown";
-
+                        string fileName = fileData.ContainsKey(fileNameKey) && fileData[fileNameKey] != null
+                            ? fileData[fileNameKey].ToString()
+                            : "Unknown";
                         // Validamos
-                        if (
-                            !fileData.ContainsKey(civilParamDataKey) ||
-                            fileData[civilParamDataKey] == null
-                        )
-                        {
-                            continue;
-                        }
+                        if (!fileData.ContainsKey(civilParamDataKey) || fileData[civilParamDataKey] == null) continue;
 
-                        List<Dictionary<string, object>> civilParamData =
-                            fileData[civilParamDataKey]
-                                as List<Dictionary<string, object>>;
-
+                        List<Dictionary<string, object>> civilParamData = 
+                            fileData[civilParamDataKey] as List<Dictionary<string, object>>;
                         // Validamos
-                        if (civilParamData == null)
-                        {
-                            continue;
-                        }
-
+                        if (civilParamData == null) continue;
+                        
+                        // Iteramos
                         foreach (Dictionary<string, object> entityData in civilParamData)
                         {
-                            string handle =
-                                entityData.ContainsKey(handleKey) &&
-                                entityData[handleKey] != null
-                                    ? entityData[handleKey].ToString()
-                                    : "Unknown";
+                            string handle = entityData.ContainsKey(handleKey) && entityData[handleKey] != null
+                                ? entityData[handleKey].ToString()
+                                : "Unknown";
 
-                            string layer =
-                                entityData.ContainsKey(layerKey) &&
-                                entityData[layerKey] != null
-                                    ? entityData[layerKey].ToString()
-                                    : "Unknown";
+                            string layer = entityData.ContainsKey(layerKey) && entityData[layerKey] != null
+                                ? entityData[layerKey].ToString()
+                                : "Unknown";
 
-                            string objectType =
-                                entityData.ContainsKey(objectTypeKey) &&
-                                entityData[objectTypeKey] != null
-                                    ? entityData[objectTypeKey].ToString()
-                                    : "Unknown";
+                            string objectType = entityData.ContainsKey(objectTypeKey) && entityData[objectTypeKey] != null
+                                ? entityData[objectTypeKey].ToString()
+                                : "Unknown";
 
-                            Dictionary<string, object> propertyValues =
-                                new Dictionary<string, object>(
-                                    StringComparer.OrdinalIgnoreCase
-                                );
+                            Dictionary<string, object> propertyValues = new Dictionary<string, object>(
+                                StringComparer.OrdinalIgnoreCase
+                            );
 
                             // -----------------------------
                             // Obtener valores de propiedades
                             // -----------------------------
 
-                            if (
-                                entityData.ContainsKey(propertySetInfoKey) &&
-                                entityData[propertySetInfoKey] != null
-                            )
+                            if (entityData.ContainsKey(propertySetInfoKey) && entityData[propertySetInfoKey] != null)
                             {
-                                List<Dictionary<string, object>> propertySetInfo =
-                                    entityData[propertySetInfoKey]
-                                        as List<Dictionary<string, object>>;
-
+                                List<Dictionary<string, object>> propertySetInfo = 
+                                    entityData[propertySetInfoKey] as List<Dictionary<string, object>>;
+                                // Validamos
                                 if (propertySetInfo != null)
                                 {
-                                    foreach (
-                                        Dictionary<string, object> psetData
-                                        in propertySetInfo
+                                    // Iteramos
+                                    foreach (Dictionary<string, object> psetData in propertySetInfo
                                     )
                                     {
-                                        if (
-                                            !psetData.ContainsKey(parametersKey) ||
-                                            psetData[parametersKey] == null
-                                        )
+                                        // Validamos
+                                        if (!psetData.ContainsKey(parametersKey) || psetData[parametersKey] == null) continue;
+                                       
+                                        List<Dictionary<string, object>> parameters = 
+                                            psetData[parametersKey] as List<Dictionary<string, object>>;
+                                        // Validamos
+                                        if (parameters == null) continue;
+                                        
+                                        // Iteramos
+                                        foreach (Dictionary<string, object> parameter in parameters)
                                         {
-                                            continue;
-                                        }
-
-                                        List<Dictionary<string, object>> parameters =
-                                            psetData[parametersKey]
-                                                as List<Dictionary<string, object>>;
-
-                                        if (parameters == null)
-                                        {
-                                            continue;
-                                        }
-
-                                        foreach (
-                                            Dictionary<string, object> parameter
-                                            in parameters
-                                        )
-                                        {
-                                            string propName =
-                                                parameter.ContainsKey(propNameKey) &&
-                                                parameter[propNameKey] != null
-                                                    ? parameter[propNameKey].ToString()
-                                                    : null;
-
-                                            if (string.IsNullOrWhiteSpace(propName))
-                                            {
-                                                continue;
-                                            }
-
-                                            object propValue =
-                                                parameter.ContainsKey(propValueKey)
-                                                    ? parameter[propValueKey]
-                                                    : null;
+                                            string propName = parameter.ContainsKey(propNameKey) && parameter[propNameKey] != null
+                                                ? parameter[propNameKey].ToString()
+                                                : null;
+                                            // Validamos
+                                            if (string.IsNullOrWhiteSpace(propName)) continue;
+                                           
+                                            object propValue = parameter.ContainsKey(propValueKey)
+                                                ? parameter[propValueKey]
+                                                : null;
 
                                             propertyValues[propName] = propValue;
                                         }
@@ -328,17 +238,14 @@ namespace TYPSA.SharedLib.Excel
                             ws.Cells[row, col++].Value = layer;
                             ws.Cells[row, col++].Value = objectType;
 
+                            // A partir del quinto encabezado se escriben las propiedades
                             foreach (string propertyName in propertyNames)
                             {
                                 object propertyValue = null;
 
-                                propertyValues.TryGetValue(
-                                    propertyName,
-                                    out propertyValue
-                                );
+                                propertyValues.TryGetValue(propertyName, out propertyValue);
 
-                                ws.Cells[row, col++].Value =
-                                    propertyValue ?? string.Empty;
+                                ws.Cells[row, col++].Value = propertyValue ?? string.Empty;
                             }
 
                             row++;
@@ -351,32 +258,18 @@ namespace TYPSA.SharedLib.Excel
 
                     if (row > 2)
                     {
-                        ExcelRange tableRange = ws.Cells[
-                            1,
-                            1,
-                            row - 1,
-                            headers.Count
-                        ];
+                        ExcelRange tableRange = ws.Cells[1, 1, row - 1, finalHeaders.Count];
 
-                        ExcelTable table = ws.Tables.Add(
-                            tableRange,
-                            "ParamDataTable"
-                        );
+                        ExcelTable table = ws.Tables.Add( tableRange, "ParamDataTable");
 
                         // Estilo de tabla
                         table.TableStyle = TableStyles.Light1;
-
                         // Mostrar filtros
                         table.ShowFilter = true;
                     }
 
                     // Encabezados en negrita
-                    ws.Cells[
-                        1,
-                        1,
-                        1,
-                        headers.Count
-                    ].Style.Font.Bold = true;
+                    ws.Cells[1, 1, 1, finalHeaders.Count].Style.Font.Bold = true;
 
                     // -----------------------------
                     // Formato
@@ -413,6 +306,8 @@ namespace TYPSA.SharedLib.Excel
                 );
             }
         }
+
+        
 
 
 
